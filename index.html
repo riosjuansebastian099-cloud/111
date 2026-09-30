@@ -3,15 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>111 - Luxury Community</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<title>111 | REGLAS OFICIALES 💎</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080808;color:#fff;font-family:'Space Grotesk';min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px 40px}
+.header{position:fixed;top:0;left:0;right:0;padding:20px 30px;display:flex;justify-content:space-between;font-family:'Syne';letter-spacing:2px;z-index:10;background:rgba(8,8,8,.8);backdrop-filter:blur(10px)}
+.wrap{width:100%;max-width:1150px;display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:start}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.big{font-family:'Syne';font-weight:800;font-size:15vw;line-height:.85;background:linear-gradient(#fff,#888 50%,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;cursor:pointer;filter:drop-shadow(0 10px 30px rgba(255,255,255,.2))}
+.glitch{position:absolute;left:50%;top:50%;width:80%;transform:translate(-50%,-50%);opacity:0;transition:.2s;pointer-events:none}
+.big:hover .glitch{opacity:1;animation:wide .12s infinite}
+@keyframes wide{0%{transform:translate(-50%,-50%) scaleX(1)}50%{transform:translate(-50%,-50%) scaleX(1.8) scaleY(.7)}100%{transform:translate(-50%,-50%) scaleX(1)}}
+.card{background:rgba(255,255,255,.07);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,.15);border-radius:26px;padding:22px}
+.inner{background:rgba(0,0,0,.5);border-radius:18px;padding:20px;border:1px solid rgba(255,255,255,.08)}
+.rule{font-size:12px;line-height:1.6;margin-bottom:14px;opacity:.75}
+.rule b{color:#fff;display:block;font-size:12px;margin-bottom:2px}
+.join{display:block;margin-top:20px;text-align:center;padding:15px;border-radius:100px;background:#fff;color:#000;font-weight:800;letter-spacing:2px;text-decoration:none;box-shadow:0 0 30px rgba(255,255,255,.4)}
+.ad{margin-top:16px;border:1px dashed rgba(255,255,255,.2);border-radius:12px;height:80px;display:flex;align-items:center;justify-content:center;font-size:9px;opacity:.35}
+</style>
 </head>
-<body style="background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 20px;font-family:sans-serif;text-align:center;min-height:100vh">
-<div style="font-size:60px;margin-top:60px">💎</div>
-<h1 style="font-size:70px;font-weight:900;letter-spacing:12px;margin-top:20px">111</h1>
-<p style="letter-spacing:6px;font-size:11px;color:#888;margin-top:5px">LUXURY STREETWEAR COMMUNITY</p>
-<div style="margin-top:25px;font-size:12px;font-weight:bold;display:flex;gap:15px"><span>🟢 40 ONLINE</span><span style="color:#444">•</span><span style="color:#777">531 MEMBERS</span></div>
-<a href="https://discord.gg/5dhu" style="margin-top:35px;background:linear-gradient(#fff,#999);color:#000;padding:16px 0;width:100%;max-width:300px;text-align:center;border-radius:999px;font-weight:900;font-size:18px;text-decoration:none;display:block">JOIN 111</a>
-<p style="color:#555;font-size:10px;letter-spacing:3px;margin-top:50px">STRICT • LUXURY • PRIVATE</p>
-</body>
-</html>
+<body>
+<div class="header"><div>💎 111 | MARCA</div><div style="border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:100px;font-size:10px">SOLO POR INVITACIÓN</div></div>
+
+<div class="wrap">
+<div>
+<div class="big">111<img class="glitch" src="dog-meme.jpg"></div>
+<div style="margin-top:12px;letter-spacing:6px;font-size:11px;opacity:.5">STREETWEAR DE LUJO • SALA PRIVADA</div>
+<div style="margin-top:16px;font-size:13px;opacity:.45;line-height:1.6">531 miembros • 40 en línea<br>discord.gg/5dhu<br><br>Pasa el mouse por el 111 → 🐶</div>
+<div class="ad">ANUNCIO 728x90 - AdSense Aquí</div>
+<div style="margin-top:14px;display:flex;gap:8px"><span style="background:rgba(255,255,255,.08);padding:7px 14px;border-radius:100px;font-size:11px">🐶 VERA • Fundadora</span><span style="background:rgba(255,255,255,.08);padding:7px 14px;border-radius:100px;font-size:11px">😎 KAI • Mod</span></div>
+<a class
