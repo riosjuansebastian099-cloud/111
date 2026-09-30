@@ -1,53 +1,279 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>111 | OFICIAL 💎</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#080808;color:#fff;font-family:Arial;padding:85px 15px 20px;min-height:100vh}
-.top{position:fixed;top:0;left:0;right:0;padding:14px 18px;display:flex;justify-content:space-between;background:#080808;border-bottom:1px solid #222;z-index:99;font-weight:800}
-.wrap{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:800px){.wrap{grid-template-columns:1fr}}
-.big{font-size:20vw;font-weight:900;line-height:.8;position:relative;background:linear-gradient(#fff,#777,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
-.big img{position:absolute;left:50%;top:50%;width:78%;transform:translate(-50%,-50%);opacity:0;transition:.2s;border-radius:12px}
-.big:hover img{opacity:1}
-.card{background:#111;border:1px solid #222;border-radius:18px;padding:18px}
-.r{font-size:11px;margin:9px 0;opacity:.7;border-left:2px solid #222;padding-left:9px}.r b{color:#fff;display:block}
-.btn{display:block;background:#fff;color:#000;text-align:center;padding:13px;border-radius:100px;font-weight:800;text-decoration:none;margin-top:12px}
-.ava{display:inline-flex;align-items:center;gap:6px;background:#1a1a1a;padding:5px 10px;border-radius:100px;font-size:11px;margin:3px;border:1px solid #222}.ava img{width:22px;height:22px;border-radius:50%;object-fit:cover}
-.invite{background:#5865F2;border-radius:12px;padding:14px;text-align:center;margin-top:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>111 — Servidor de la Comunidad</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080809;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #8a8a93;
+            --accent-green: #00ff87;
+            --glow-green: rgba(0, 255, 135, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 120%, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Avatar & Branding Header */
+        .brand-header {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Imagen de Cruces */
+        .server-avatar {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 32px;
+            border: 1px solid var(--border-color);
+            background: #000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .logo-wrapper:hover .server-avatar {
+            transform: scale(1.03) translateY(-2px);
+        }
+
+        .server-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .server-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .server-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #5865F2;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #5865F2;
+        }
+
+        /* Panel de Estadísticas (Live API) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 1.5rem 1rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border 0.3s ease, background 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .stat-label.online::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        /* Botón de Invitación Principal */
+        .join-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 1.25rem;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+
+        .join-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.18);
+        }
+
+        .join-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .join-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        .footer-link {
+            display: inline-block;
+            margin-top: 2.5rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 135, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 135, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 135, 0); }
+        }
+    </style>
 </head>
 <body>
-<div class="top"><span>💎 111 | MARCA</span><span style="font-size:9px;border:1px solid #333;padding:4px 10px;border-radius:100px">discord.gg/5dhu</span></div>
-<div class="wrap">
-<div>
-<div class="big">111<img src="dog_final.jpg"></div>
-<div style="font-size:10px;opacity:.5;letter-spacing:4px;margin-top:6px">531 MIEMBROS • 40 ONLINE</div>
-<div style="margin-top:10px"><span class="ava"><img src="dog_final.jpg"> VERA</span><span class="ava"><img src="mc_final.jpg"> KAI McLovin</span></div>
 
-<div class="invite">
-<div style="font-weight:800;letter-spacing:1px">💬 INVITACIÓN OFICIAL</div>
-<div style="font-size:12px;margin:6px 0;opacity:.9">discord.gg/5dhu</div>
-<a class="btn" href="https://discord.gg/5dhu" style="background:#fff;margin-top:8px">UNIRSE A 111 →</a>
-<div style="font-size:9px;opacity:.6;margin-top:6px">Invitación válida • No expira</div>
-</div>
+    <div class="container">
+        <!-- Encabezado de la Marca -->
+        <header class="brand-header">
+            <div class="logo-wrapper">
+                <!-- He enlazado directamente tu foto de perfil actual de tu server -->
+                <img src="https://discordapp.com" alt="111 Logo" class="server-avatar" onerror="this.src='https://website-files.com'">
+            </div>
+            <h1 class="server-title">111</h1>
+            <span class="server-badge">Servidor de comunidad</span>
+        </header>
 
-</div>
-<div class="card">
-<div style="font-size:11px;margin-bottom:10px">📜 REGLAS DEL SERVIDOR</div>
-<div class="r"><b>1. Respeto ante todo</b>No acoso.</div>
-<div class="r"><b>2. Sin spam</b>No floods.</div>
-<div class="r"><b>3. Contenido apropiado</b>Nada NSFW.</div>
-<div class="r"><b>4. Sin publicidad</b>Sin permiso.</div>
-<div class="r"><b>5. Canal correcto</b>Usa cada canal bien.</div>
-<div class="r"><b>6. Sin discriminacion</b>Cero odio.</div>
-<div class="r"><b>7. Privacidad</b>No doxxeo.</div>
-<div class="r"><b>8. Disfruta 🎉</b>Bienvenido!</div>
-<a class="btn" href="https://discord.gg/5dhu">ACEPTO INVITACIÓN • ENTRAR</a>
-</div>
-</div>
-</body>
-</html>
+        <!-- Estadísticas en Tiempo Real -->
+        <main>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label online">En línea</div>
+                    <div class="stat-value" id="online-count">--</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Miembros</div>
+                    <div class="stat-value" id="member-count">--</div>
+                </div>
+            </div>
+
+            <!-- Botón de Conexión Pro -->
+            <a href="https://discord.gg" target="_blank" class="join-btn">
+                <svg viewBox="0 0 127.14 96.36">
+                    <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.11,68.43,68.43,0,0,1-10.85-5.22c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,73,0c.85.69,1.74,1.37,2.65,2a68.45,68.45,0,0,1-10.85,5.22,74.37,74.37,0,0,0,6.85,11.11,105.73,105.73,0,0,0,31-18.83C129,50.7,122.64,27.78,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/>
+                </svg>
+                Unirse al Servidor
+            </a>
+        </main>
+
+        <footer>
+            <a href="https://discord.gg" target="_blank" class="footer-link">discord.gg/5dhu</a>
+        </footer>
+    </div>
+
+    <!-- Script de Sincronización Automática con la API Widget de Discord -->
+    <script>
+        const widgetUrl = 'https://discord.com';
+
+        async function fetchDiscordStats() {
+            try {
+                const response = await fetch(widgetUrl);
+                if (!response.ok) throw new Error('Error en API');
+                const data = await response.json();
+                
+                // Actualiza los elementos con animaciones suaves
+                document.getElementById('member-count').innerText = data.approximate_member_count.toLocaleString();
+                document.getElementById('online-count').innerText = data.approximate_presence_count.toLocaleString();
+            } catch (error) {
